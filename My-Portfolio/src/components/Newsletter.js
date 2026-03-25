@@ -37,16 +37,21 @@ export const Newsletter = ({ status, message, onValidated }) => {
     display: "flex",
     alignItems: "center",
     border: "1px solid #4A4A4A",
-    marginTop: "20px"
+    marginTop: "20px",
+    // Added flex-wrap for mobile
+    flexWrap: "wrap", 
+    overflow: "hidden"
   };
 
   const inputStyle = {
-    width: "100%",
+    // Flex-grow: 1 allows it to take space, but minWidth ensures it stays usable
+    flex: "1",
+    minWidth: "200px", 
     color: "#000",
     fontWeight: "500",
     background: "transparent",
     border: "none",
-    padding: "0 15px",
+    padding: "15px",
     outline: "none"
   };
 
@@ -58,7 +63,10 @@ export const Newsletter = ({ status, message, onValidated }) => {
     letterSpacing: "0.5px",
     borderRadius: "16px",
     border: "none",
-    cursor: "pointer"
+    cursor: "pointer",
+    // Ensure button takes full width on very small screens if wrapped
+    width: "auto",
+    minWidth: "fit-content"
   };
 
   return (
@@ -66,7 +74,7 @@ export const Newsletter = ({ status, message, onValidated }) => {
         <div style={containerStyle} className="newsletter-bx wow slideInUp">
           <Row className="align-items-center">
             <Col xs={12} md={12} xl={5}>
-              <h3 style={{ margin: "0", color: "#121212" }}>
+              <h3 style={{ margin: "0", color: "#121212", fontSize: "24px" }}>
                 Subscribe to our Newsletter<br /> & Never miss latest updates
               </h3>
               {status === 'sending' && <Alert>Sending...</Alert>}
@@ -75,7 +83,7 @@ export const Newsletter = ({ status, message, onValidated }) => {
             </Col>
             <Col xs={12} md={12} xl={7}>
               <form onSubmit={handleSubmit}>
-                <div style={formBoxStyle}>
+                <div style={formBoxStyle} className="new-email-bx">
                   <input 
                     style={inputStyle}
                     value={email} 
